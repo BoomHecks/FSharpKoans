@@ -56,7 +56,7 @@ module ``07: The Good Kind of Discrimination`` =
     [<Test>]
     let ``03 We can create a discriminated union using named fields`` () =
         let someDegree = BSc (second = ComputerScience, first = Mathematics)            
-        someDegree |> should equal (BSc (ComputerScience, Mathematics))
+        someDegree |> should equal (BSc ( Mathematics, ComputerScience))
 
     [<Test>]
     let ``04 Pattern-matching using named fields`` () =
@@ -85,5 +85,12 @@ module ``07: The Good Kind of Discrimination`` =
             match x with
             | Empty -> 0
             | Node (_, a, b) -> 1 + max (depth a) (depth b)
-        let a = __ // <-- you may want to spread this over multiple lines and/or let-bindings ...!
+        let a =  Node ("1",
+                           Node ("2",
+                                     Node ("3",
+                                               Node ("4", Empty,Empty),
+                                                       
+                                                       Empty)
+                                                          ,Empty),
+                                                                   Empty ) // <-- you may want to spread this over multiple lines and/or let-bindings ...!
         depth a |> should equal 4
